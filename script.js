@@ -15,7 +15,7 @@ const films = [
     technologies: ["Rendered with UE5"], slug: "taboo"
   },
   {
-    title: "独立游戏《古墓迷踪》", titleLines: ["独立游戏", "《古墓迷踪》"], image: "assets/cards/04.png", genre: "3D PROJECT", year: "2024", director: "", minutes: "--",
+    title: "独立游戏《古墓迷踪》", titleLines: ["独立游戏", "《古墓迷踪》"], titleClass: "is-chinese", image: "assets/cards/04.png", genre: "3D PROJECT", year: "2024", director: "", minutes: "--",
     awardYear: "2024", portfolio: true,
     technologies: ["Maya", "Zbrush", "Substance Painter", "Rizom UV", "Photoshop", "Rendered with UE4"], slug: "kafkas-last-trial"
   },
@@ -125,7 +125,7 @@ function slideTemplate(film, index) {
     ><div class="slide-shell"><img class="slide-image" src="${film.image}" alt="${film.title} film still" loading="eager" draggable="false" /><div class="slide-content"><div class="slide-details">
       <div class="award-block${isPortfolio ? " is-year-only" : ""}">${awardContent}</div>
       <div class="reviews${isPortfolio ? " is-technologies" : ""}">${sideContent}</div>
-      <div class="film-info${isPortfolio ? " is-portfolio" : ""}"><span class="film-genre">${film.genre}</span><h1 class="film-title">${titleContent}</h1><div class="film-meta"><div class="film-meta-row"><span>DIRECTOR</span><span>${film.director}</span></div><div class="film-meta-row"><span>YEAR</span><span>${film.year}</span></div><div class="film-meta-row"><span>CATEGORY</span><span>${film.genre}</span></div></div></div>
+      <div class="film-info${isPortfolio ? " is-portfolio" : ""}"><span class="film-genre">${film.genre}</span><h1 class="film-title${film.titleClass ? ` ${film.titleClass}` : ""}">${titleContent}</h1><div class="film-meta"><div class="film-meta-row"><span>DIRECTOR</span><span>${film.director}</span></div><div class="film-meta-row"><span>YEAR</span><span>${film.year}</span></div><div class="film-meta-row"><span>CATEGORY</span><span>${film.genre}</span></div></div></div>
       <a class="explore" href="#${film.slug}" aria-label="Explore ${film.title}"><span>EXPLORE</span><span class="explore-arrow">→</span></a>
     </div></div></div></article>`;
 }

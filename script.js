@@ -1,23 +1,23 @@
 const films = [
   {
-    title: "SAVOY", image: "assets/cards/01.jpg", genre: "DOCUMENTARY", year: "2022", director: "ZOHAR WAGNER", minutes: "77",
-    awardYear: "2022", award: "BEST DIRECTOR & EDITING AWARD", awardLogo: "docaviv",
-    reviews: [["WEIZMAN NATIONAL MUSEUM", '"FAST-PACED AND ENGROSSING"'], ["SF JEWISH FILM FESTIVAL", '"HISTORY THROUGH A HEROINE"'], ["E-WALLA", '"BRAVE, POETIC, LIBERATED"']], slug: "savoy"
+    title: "TWILIGHT BOOKSTORE", image: "assets/cards/01.jpg", genre: "3D PROJECT", year: "2021", director: "", minutes: "--",
+    awardYear: "2021", portfolio: true,
+    technologies: ["MAYA", "ZBRUSH", "SUBSTANCE PAINTER", "RIZOM UV", "PHOTOSHOP", "RENDERED WITH ARNOLD"], slug: "savoy"
   },
   {
-    title: "MOON IN THE 12TH HOUSE", image: "assets/cards/02.jpg", genre: "FEATURE FILM", year: "2014", director: "DORIT HAKIM KRAMER", minutes: "110",
-    awardYear: "2014", award: "JERUSALEM FILM FESTIVAL", awardLogo: "salona",
-    reviews: [["SALONA", '"BREATHTAKING CINEMATOGRAPHY"'], ["HABAMA", '"DELICATE AND MOVING"'], ["SIFF JURY STATEMENT", '"PURE CINEMATIC BEAUTY"']], slug: "moon-in-the-12th-house"
+    title: "FOG CITY FIRST SNOW", image: "assets/cards/02.jpg", genre: "3D PROJECT", year: "2022", director: "", minutes: "--",
+    awardYear: "2022", portfolio: true,
+    technologies: ["MAYA", "ZBRUSH", "SUBSTANCE PAINTER", "RIZOM UV", "PHOTOSHOP", "RENDERED WITH UE"], slug: "moon-in-the-12th-house"
   },
   {
-    title: "TABOO", image: "assets/cards/03.png", genre: "DOCUMENTARY", year: "2024", director: "SHAULY MELAMED", minutes: "82",
-    awardYear: "2024", award: "WORLD PREMIERE", awardLogo: "POV",
-    reviews: [["POV MAGAZINE", '"TOUCHING AND INTIMATE"'], ["POV MAGAZINE", '"GROUNDBREAKING LGBTQ+ CINEMA"'], ["POV MAGAZINE", '"CONFRONTING CULTURAL TABOOS"']], slug: "taboo"
+    title: "STREET AT DIFFERENT TIMES", image: "assets/cards/03.png", genre: "3D PROJECT", year: "2025", director: "", minutes: "--",
+    awardYear: "2025", portfolio: true,
+    technologies: ["RENDERED WITH UE5"], slug: "taboo"
   },
   {
-    title: "KAFKA'S LAST TRIAL", image: "assets/cards/04.png", genre: "DOCUMENTARY", year: "2025", director: "ELIRAN PELED", minutes: "90",
-    awardYear: "2024", award: "HAIFA FILM FESTIVAL", awardLogo: "critical acclaim",
-    reviews: [["CRITICAL ACCLAIM", '"A GENIUS NOWHERE AT HOME"'], ["CRITICAL ACCLAIM", '"A REAL-LIFE KAFKAESQUE TRIAL"'], ["CRITICAL ACCLAIM", '"THE CASE OF A LITERARY LEGACY"']], slug: "kafkas-last-trial"
+    title: "独立游戏《古墓迷踪》", image: "assets/cards/04.png", genre: "3D PROJECT", year: "2024", director: "", minutes: "--",
+    awardYear: "2024", portfolio: true,
+    technologies: ["MAYA", "ZBRUSH", "SUBSTANCE PAINTER", "RIZOM UV", "PHOTOSHOP", "RENDERED WITH UE4"], slug: "kafkas-last-trial"
   },
   {
     title: "MY PROJECT X", image: "assets/cards/05.png", genre: "DOCUMENTARY", year: "2024", director: "LIMOR PINHASOV", minutes: "88",
@@ -111,12 +111,18 @@ function trackMetrics() {
 }
 
 function slideTemplate(film, index) {
-  const reviews = film.reviews.map(([source, quote]) => `<div class="review"><span class="review-stars">★★★★★</span><span class="review-eyebrow">${source || "CRITICAL ACCLAIM"}</span><strong class="review-quote">${quote}</strong></div>`).join("");
+  const isPortfolio = Boolean(film.portfolio);
+  const sideContent = isPortfolio
+    ? `<div class="technologies" aria-label="Software and rendering tools">${film.technologies.map(technology => `<span class="technology">${technology}</span>`).join("")}</div>`
+    : film.reviews.map(([source, quote]) => `<div class="review"><span class="review-stars">★★★★★</span><span class="review-eyebrow">${source || "CRITICAL ACCLAIM"}</span><strong class="review-quote">${quote}</strong></div>`).join("");
+  const awardContent = isPortfolio
+    ? `<span class="award-year">${film.awardYear}</span>`
+    : `<span class="award-year">${film.awardYear}</span><span class="award-name">${film.award}</span>${film.awardLogo ? `<span class="award-logo">${film.awardLogo}</span>` : ""}`;
   return `<article class="slide" data-index="${index}" aria-hidden="${index === activeIndex ? "false" : "true"}"
     ><div class="slide-shell"><img class="slide-image" src="${film.image}" alt="${film.title} film still" loading="eager" draggable="false" /><div class="slide-content"><div class="slide-details">
-      <div class="award-block"><span class="award-year">${film.awardYear}</span><span class="award-name">${film.award}</span>${film.awardLogo ? `<span class="award-logo">${film.awardLogo}</span>` : ""}</div>
-      <div class="reviews">${reviews}</div>
-      <div class="film-info"><span class="film-genre">${film.genre}</span><h1 class="film-title">${film.title}</h1><div class="film-meta"><div class="film-meta-row"><span>DIRECTOR</span><span>${film.director}</span></div><div class="film-meta-row"><span>YEAR</span><span>${film.year}</span></div><div class="film-meta-row"><span>CATEGORY</span><span>${film.genre}</span></div></div></div>
+      <div class="award-block${isPortfolio ? " is-year-only" : ""}">${awardContent}</div>
+      <div class="reviews${isPortfolio ? " is-technologies" : ""}">${sideContent}</div>
+      <div class="film-info${isPortfolio ? " is-portfolio" : ""}"><span class="film-genre">${film.genre}</span><h1 class="film-title">${film.title}</h1><div class="film-meta"><div class="film-meta-row"><span>DIRECTOR</span><span>${film.director}</span></div><div class="film-meta-row"><span>YEAR</span><span>${film.year}</span></div><div class="film-meta-row"><span>CATEGORY</span><span>${film.genre}</span></div></div></div>
       <a class="explore" href="#${film.slug}" aria-label="Explore ${film.title}"><span>EXPLORE</span><span class="explore-arrow">→</span></a>
     </div></div></div></article>`;
 }

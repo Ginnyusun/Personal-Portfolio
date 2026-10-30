@@ -78,12 +78,17 @@ body.site-entered .intro-screen { opacity: 0; visibility: hidden; pointer-events
 .award-year { display: block; margin-bottom: .55rem; font-size: 1.35rem; font-weight: 400; line-height: .9; }
 .award-name { display: block; font-size: .9rem; font-weight: 400; line-height: .94; }
 .award-logo { display: block; margin-top: 2rem; font-size: 1.22rem; letter-spacing: .1em; opacity: .78; text-transform: lowercase; }
+.award-block.is-year-only { left: 3.55%; width: auto; text-align: left; }
+.award-block.is-year-only .award-year { margin: 0; font-size: 1.55rem; }
 
 .reviews { top: 5.3%; right: 3.55%; width: 11.6rem; display: flex; flex-direction: column; align-items: center; gap: 0; text-align: center; }
 .review { width: 100%; height: 6.68rem; display: flex; flex-direction: column; align-items: center; }
 .review-stars { font-size: 1.14rem; letter-spacing: .16em; line-height: 1; }
 .review-eyebrow { margin-top: 1.15rem; font-family: var(--eyeb); font-size: .62rem; font-weight: 400; letter-spacing: .22em; line-height: 1; }
 .review-quote { margin: .85rem 0 0; max-width: 13ch; font-family: var(--display); font-size: 1.23rem; font-weight: 400; line-height: .9; text-transform: uppercase; }
+.reviews.is-technologies { top: 10%; width: 17rem; align-items: flex-end; text-align: right; }
+.technologies { width: 100%; display: flex; flex-direction: column; align-items: flex-end; gap: .42rem; }
+.technology { font-family: var(--display); font-size: .88rem; font-weight: 400; line-height: 1; text-transform: uppercase; text-shadow: 0 1px 8px rgba(0,0,0,.45); }
 
 .film-info { left: 3.55%; bottom: 4.45%; width: 24.7rem; display: flex; flex-direction: column; align-items: center; text-align: center; font-family: var(--display); }
 .film-genre { margin-bottom: 1.25rem; font-family: var(--eyeb); font-size: .6rem; font-weight: 400; letter-spacing: .29em; line-height: 1; text-transform: uppercase; transform: translateY(-6px); }
@@ -92,6 +97,10 @@ body.site-entered .intro-screen { opacity: 0; visibility: hidden; pointer-events
 .film-meta-row { display: grid; grid-template-columns: 1fr 1fr; height: .75rem; border-top: 1px solid rgba(250,247,239,.95); }
 .film-meta-row span { display: flex; align-items: center; justify-content: center; white-space: nowrap; }
 .film-meta-row span:first-child { border-right: 1px solid rgba(250,247,239,.5); }
+.film-info.is-portfolio { bottom: 5.25%; width: 58%; align-items: flex-start; text-align: left; }
+.film-info.is-portfolio .film-genre,
+.film-info.is-portfolio .film-meta { display: none; }
+.film-info.is-portfolio .film-title { width: 100%; max-width: 42rem; line-height: .82; text-align: left; text-wrap: balance; }
 
 .explore { right: 3.55%; bottom: 1.35%; width: 10.3rem; height: 2.75rem; display: grid; grid-template-columns: 1fr 2.75rem; border: 1px solid rgba(250,247,239,.95); color: var(--paper); font-family: var(--display); font-size: .63rem; font-weight: 400; letter-spacing: .13em; text-transform: uppercase; pointer-events: auto; transition: background .35s ease, color .35s ease; }
 .explore span { display: flex; align-items: center; justify-content: center; }
@@ -154,9 +163,16 @@ body.site-entered .intro-screen { opacity: 0; visibility: hidden; pointer-events
   .slide-content::before { background: linear-gradient(180deg, rgba(0,0,0,.12) 0%, transparent 18%, transparent 57%, rgba(0,0,0,.82) 91%, rgba(0,0,0,.92) 100%); }
   .award-block { display: none; }
   .reviews { display: none; }
+  .award-block.is-year-only { display: block; top: 7%; left: 5%; width: auto; }
+  .award-block.is-year-only .award-year { margin: 0; font-size: .72rem; }
+  .reviews.is-technologies { display: flex; top: 7%; right: 5%; width: 48%; align-items: flex-end; text-align: right; }
+  .technologies { gap: .14rem; }
+  .technology { font-size: .42rem; line-height: 1.08; text-shadow: 0 1px 5px rgba(0,0,0,.6); }
   .film-info { left: 5%; right: auto; bottom: 9%; width: 58%; align-items: flex-start; text-align: left; }
   .film-genre { margin-bottom: .4rem; font-size: .4rem; line-height: 1; letter-spacing: .2em; transform: none; }
   .film-title { width: 100%; font-size: clamp(1.25rem, 7.3vw, 1.8rem); line-height: .82; transform: none; }
+  .film-info.is-portfolio { left: 5%; bottom: 10%; width: 62%; }
+  .film-info.is-portfolio .film-title { font-size: 1.3rem; line-height: .84; }
   .film-meta { display: none; }
   .explore { right: 5%; left: auto; bottom: 8%; transform: none; width: 5.9rem; height: 2rem; color: #060606; background: var(--paper); border-color: var(--paper); font-size: .48rem; }
   .explore .explore-arrow { width: 2rem; }

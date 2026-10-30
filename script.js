@@ -1,23 +1,23 @@
 const films = [
   {
-    title: "TWILIGHT BOOKSTORE", image: "assets/cards/01.jpg", genre: "3D PROJECT", year: "2021", director: "", minutes: "--",
+    title: "TWILIGHT BOOKSTORE", titleLines: ["TWILIGHT", "BOOKSTORE"], image: "assets/cards/01.jpg", genre: "3D PROJECT", year: "2021", director: "", minutes: "--",
     awardYear: "2021", portfolio: true,
-    technologies: ["MAYA", "ZBRUSH", "SUBSTANCE PAINTER", "RIZOM UV", "PHOTOSHOP", "RENDERED WITH ARNOLD"], slug: "savoy"
+    technologies: ["Maya", "Zbrush", "Substance Painter", "Rizom UV", "Photoshop", "Rendered with Arnold"], slug: "savoy"
   },
   {
-    title: "FOG CITY FIRST SNOW", image: "assets/cards/02.jpg", genre: "3D PROJECT", year: "2022", director: "", minutes: "--",
+    title: "FOG CITY FIRST SNOW", titleLines: ["FOG CITY", "FIRST SNOW"], image: "assets/cards/02.jpg", genre: "3D PROJECT", year: "2022", director: "", minutes: "--",
     awardYear: "2022", portfolio: true,
-    technologies: ["MAYA", "ZBRUSH", "SUBSTANCE PAINTER", "RIZOM UV", "PHOTOSHOP", "RENDERED WITH UE"], slug: "moon-in-the-12th-house"
+    technologies: ["Maya", "Zbrush", "Substance Painter", "Rizom UV", "Photoshop", "Rendered with UE"], slug: "moon-in-the-12th-house"
   },
   {
-    title: "STREET AT DIFFERENT TIMES", image: "assets/cards/03.png", genre: "3D PROJECT", year: "2025", director: "", minutes: "--",
+    title: "STREET AT DIFFERENT TIMES", titleLines: ["STREET AT", "DIFFERENT TIMES"], image: "assets/cards/03.png", genre: "3D PROJECT", year: "2025", director: "", minutes: "--",
     awardYear: "2025", portfolio: true,
-    technologies: ["RENDERED WITH UE5"], slug: "taboo"
+    technologies: ["Rendered with UE5"], slug: "taboo"
   },
   {
-    title: "独立游戏《古墓迷踪》", image: "assets/cards/04.png", genre: "3D PROJECT", year: "2024", director: "", minutes: "--",
+    title: "独立游戏《古墓迷踪》", titleLines: ["独立游戏", "《古墓迷踪》"], image: "assets/cards/04.png", genre: "3D PROJECT", year: "2024", director: "", minutes: "--",
     awardYear: "2024", portfolio: true,
-    technologies: ["MAYA", "ZBRUSH", "SUBSTANCE PAINTER", "RIZOM UV", "PHOTOSHOP", "RENDERED WITH UE4"], slug: "kafkas-last-trial"
+    technologies: ["Maya", "Zbrush", "Substance Painter", "Rizom UV", "Photoshop", "Rendered with UE4"], slug: "kafkas-last-trial"
   },
   {
     title: "MY PROJECT X", image: "assets/cards/05.png", genre: "DOCUMENTARY", year: "2024", director: "LIMOR PINHASOV", minutes: "88",
@@ -112,6 +112,9 @@ function trackMetrics() {
 
 function slideTemplate(film, index) {
   const isPortfolio = Boolean(film.portfolio);
+  const titleContent = film.titleLines
+    ? film.titleLines.map(line => `<span class="film-title-line">${line}</span>`).join("")
+    : film.title;
   const sideContent = isPortfolio
     ? `<div class="technologies" aria-label="Software and rendering tools">${film.technologies.map(technology => `<span class="technology">${technology}</span>`).join("")}</div>`
     : film.reviews.map(([source, quote]) => `<div class="review"><span class="review-stars">★★★★★</span><span class="review-eyebrow">${source || "CRITICAL ACCLAIM"}</span><strong class="review-quote">${quote}</strong></div>`).join("");
@@ -122,7 +125,7 @@ function slideTemplate(film, index) {
     ><div class="slide-shell"><img class="slide-image" src="${film.image}" alt="${film.title} film still" loading="eager" draggable="false" /><div class="slide-content"><div class="slide-details">
       <div class="award-block${isPortfolio ? " is-year-only" : ""}">${awardContent}</div>
       <div class="reviews${isPortfolio ? " is-technologies" : ""}">${sideContent}</div>
-      <div class="film-info${isPortfolio ? " is-portfolio" : ""}"><span class="film-genre">${film.genre}</span><h1 class="film-title">${film.title}</h1><div class="film-meta"><div class="film-meta-row"><span>DIRECTOR</span><span>${film.director}</span></div><div class="film-meta-row"><span>YEAR</span><span>${film.year}</span></div><div class="film-meta-row"><span>CATEGORY</span><span>${film.genre}</span></div></div></div>
+      <div class="film-info${isPortfolio ? " is-portfolio" : ""}"><span class="film-genre">${film.genre}</span><h1 class="film-title">${titleContent}</h1><div class="film-meta"><div class="film-meta-row"><span>DIRECTOR</span><span>${film.director}</span></div><div class="film-meta-row"><span>YEAR</span><span>${film.year}</span></div><div class="film-meta-row"><span>CATEGORY</span><span>${film.genre}</span></div></div></div>
       <a class="explore" href="#${film.slug}" aria-label="Explore ${film.title}"><span>EXPLORE</span><span class="explore-arrow">→</span></a>
     </div></div></div></article>`;
 }
